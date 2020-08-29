@@ -34,3 +34,73 @@ form {
     max-width: 730px;
     
 }
+
+form h1 {
+    font-size: 36px;
+}
+
+form fieldset {
+    margin: 64px 0 0 0;
+    border: 0;
+}
+
+form legend {
+    margin: 0 0 40px 0;
+}
+
+form legend h2 {
+    font-size: 24px;
+}
+
+form .field {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin: 0 0 24px 0;
+}
+
+form .field-group {
+    display: flex;
+}
+
+form input,
+form select{
+    background-color: #f0f0f5;
+    border: 0;
+    padding: 16px 24px;
+    font-size: 16px;
+    border-radius: 8px;
+}
+
+form select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+form label {
+    font-size: 14px;
+    margin: 0 0 14px 0;
+}
+
+form .field-group .field + .field {
+    margin: 0 0 0 24px;
+}
+
+form button {
+    width: 260px;
+    height: 56px;
+    background-color: var(--primary-color);
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    font-size-adjust: 16px;
+    border: 0;
+    margin: 40px 0 0 0;
+    cursor: pointer;
+    transition: background-color 400ms;
+}
+
+form button:hover {
+    background-color: #2fb86e;
+}
