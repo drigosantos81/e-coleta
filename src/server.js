@@ -1,19 +1,26 @@
 const express = require('express');
 const server = express();
+const nunjucks = require('nunjucks');
+const { urlencoded } = require('express');
 
 // Configuração da pasta public
 server.use(express.static('public'));
 
+nunjucks.configure('src/pages', {
+    express: server,
+    noCache: true
+});
+
 server.get('/', (req, res) => {
-    res.sendFile(__dirname + '/pages/index.html');
+    return res.render('index.html', { title: 'Seu marketplace de coleta de resíduos.' });
 });
 
 server.get('/create-point', (req, res) => {
-    res.sendFile(__dirname + '/pages/create-point.html');
+    return res.render('create-point.html');
 });
 
 server.get('/search-results', (req, res) => {
-    res.sendFile(__dirname + '/pages/search-results.html');
+    return res.render('search-results.html');
 });
 
 server.listen(3000, () => {
