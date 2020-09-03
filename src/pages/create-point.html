@@ -14,7 +14,7 @@
 {% block content %}
 
     {% include 'partials/page-header.html' %}
-    
+
     <form action="">
         <h1>Cadastro do Ponto de Coleta</h1>
 
@@ -23,9 +23,15 @@
                 <h2>Dados da Entidade</h2>
             </legend>
 
-            <div class="field">
-                <label for="name">Nome da Entidade</label>
-                <input type="text" name="name" id="" required>
+            <div class="field-group">
+                <div class="field">
+                    <label for="name">Nome da Entidade</label>
+                    <input type="text" name="name"  required>
+                </div>
+                <div class="field">
+                    <label for="name">Imagem da Entidade</label>
+                    <input type="url" name="image" placeholder="http://..." required>
+                </div>
             </div>
 
             <div class="field-group">
@@ -59,7 +65,8 @@
 
         <fieldset>
             <legend>
-                <h2>Ítens de Coleta</h2>
+                <h2>Itens de Coleta</h2>
+                <span>Selecione um ou mais itens abaixo</span>
             </legend>
             <div class="items-grid">
                 <li data-id="1">
