@@ -8,6 +8,9 @@ const db = require('./database/db');
 // Configuração da pasta public
 server.use(express.static('public'));
 
+// Habilitar o uso do "req.body"
+server.use(express.urlencoded( {extended: true }));
+
 nunjucks.configure('src/pages', {
     express: server,
     noCache: true
@@ -18,7 +21,51 @@ server.get('/', (req, res) => {
 });
 
 server.get('/create-point', (req, res) => {
+    console.log(req.query);
+
     return res.render('create-point.html');
+});
+
+server.post('/savepoint', (req, res) => {
+    console.log(req.body);
+
+    // INCLUSÃO DE DADOS
+    const query = `
+        INSERT INTO places (
+            image,
+            name,
+            address,
+            address2,
+            state,
+            city,
+            items
+        ) VALUES (
+            ?, ?, ?, ?, ?, ?, ?
+        );
+    `
+
+    const values = [
+        req.body.image,
+        req.body.name,
+        req.body.address,
+        req.body.address2,
+        req.body.state,
+        req.body.city,
+        req.body.items,
+    ]
+
+    function afterInsertData(err) {
+        if (err) {
+            return console.log(err);
+        }
+
+        console.log('Cadastrado com sucesso');
+        console.log(this);
+
+        return res.render('create-point.html', { saved: true });
+    }
+
+    db.run(query, values, afterInsertData);
 });
 
 server.get('/search-results', (req, res) => {

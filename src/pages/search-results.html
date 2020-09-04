@@ -15,9 +15,15 @@
     {% include 'partials/page-header.html' %}
         
     <main>
-        <h4>
-            <strong>{{total}}</strong> encontrados
-        </h4>
+        {% if total > 0 %}            
+            <h4>
+                <strong>{{total}}</strong> 
+                {% if total > 1 %}
+                    locals encontrados.
+                {% else %}
+                    local encontrado.
+                {% endif %}
+            </h4>
 
         <div class="cards">
 
@@ -35,6 +41,10 @@
             {% endfor %}
             
         </div>
+
+        {% else %}
+            <h4><strong>Nenhum</strong> local encontrado</h4>
+        {% endif %} 
     </main>
 
 {% endblock content %}
