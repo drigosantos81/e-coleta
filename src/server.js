@@ -56,7 +56,8 @@ server.post('/savepoint', (req, res) => {
 
     function afterInsertData(err) {
         if (err) {
-            return console.log(err);
+            console.log(err);
+            return res.send('Erro no cadastro!')
         }
 
         console.log('Cadastrado com sucesso');
@@ -69,6 +70,7 @@ server.post('/savepoint', (req, res) => {
 });
 
 server.get('/search-results', (req, res) => {
+
     db.all(`SELECT * FROM places`, function(err, rows) {
         if (err) {
             return console.log(err);
@@ -77,9 +79,7 @@ server.get('/search-results', (req, res) => {
         const total = rows.length;
 
         return res.render('search-results.html', { places: rows, total: total });
-    });
-
-    
+    });    
 });
 
 server.listen(3000, () => {

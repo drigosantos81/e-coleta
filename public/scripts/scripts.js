@@ -80,6 +80,6 @@ function handleSelectedItem(event) {
         selectedItems.push(itemId)
     }
 
-    console.log('selectedItem: ', selectedItems);
+    // console.log('selectedItem: ', selectedItems);
     collectedItems.value = selectedItems;    
 }

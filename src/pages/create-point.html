@@ -9,6 +9,7 @@
 
 {% block styles %}
     <link rel="stylesheet" href="./styles/create-point.css">
+    <link rel="stylesheet" href="./styles/modal.css">
 {% endblock styles %}
 
 {% block content %}
@@ -89,9 +90,9 @@
                     <img src="./assets/organicos.svg" alt="Resíduos Orgânicos">
                     <span>Resíduos Orgânicos</span>
                 </li>
-                <li data-id="Baterias">
-                    <img src="./assets/baterias.svg" alt="Baterias">
-                    <span>Baterias</span>
+                <li data-id="Óleo de Cozinha">
+                    <img src="./assets/oleo.svg" alt="Óleos">
+                    <span>Óleo de Cozinha</span>
                 </li>                    
             </div>
 
@@ -102,6 +103,12 @@
     </form>
 
 {% endblock content %}
+
+{% block modal %}
+    {% if saved %}
+        {% include 'partials/point-created.html' %}
+    {% endif %}
+{% endblock modal %}
 
 {% block scripts %}
     <script src="./scripts/scripts.js"></script>
