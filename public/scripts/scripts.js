@@ -49,7 +49,7 @@ document
 
 const itemsToCollect = document.querySelectorAll('.items-grid li');
 for (const item of itemsToCollect) {
-    item.addEventListener('click', handleSelectedItem) 
+    item.addEventListener('click', handleSelectedItem)
 }
 
 const collectedItems = document.querySelector('input[name=items]');
@@ -59,7 +59,7 @@ let selectedItems = [];
 function handleSelectedItem(event) {
     const itemLi = event.target;
 
-    itemLi.classList.toggle('selected')
+    itemLi.classList.toggle('selected');
 
     const itemId = itemLi.dataset.id;
     console.log('itemId: ', itemId);
@@ -77,7 +77,7 @@ function handleSelectedItem(event) {
 
         selectedItems = filteredItems;
     } else {
-        selectedItems.push(itemId)
+        selectedItems.push(itemId);
     }
 
     // console.log('selectedItem: ', selectedItems);

@@ -21,14 +21,10 @@ server.get('/', (req, res) => {
 });
 
 server.get('/create-point', (req, res) => {
-    console.log(req.query);
-
     return res.render('create-point.html');
 });
 
 server.post('/savepoint', (req, res) => {
-    console.log(req.body);
-
     // INCLUSÃO DE DADOS
     const query = `
         INSERT INTO places (
@@ -60,18 +56,24 @@ server.post('/savepoint', (req, res) => {
             return res.send('Erro no cadastro!')
         }
 
-        console.log('Cadastrado com sucesso');
-        console.log(this);
-
         return res.render('create-point.html', { saved: true });
     }
 
     db.run(query, values, afterInsertData);
 });
 
-server.get('/search-results', (req, res) => {
+server.get('/search', (req, res) => {
+    const search = req.query.search;
 
-    db.all(`SELECT * FROM places`, function(err, rows) {
+    if (search == "") {
+        return res.render('search-results.html', { total: 0 });
+    }
+
+    db.all(`
+        SELECT * FROM places
+        WHERE city LIKE '%${search}%'
+        OR state LIKE '%${search}%'
+    `, function(err, rows) {
         if (err) {
             return console.log(err);
         }
