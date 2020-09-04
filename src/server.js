@@ -3,6 +3,8 @@ const server = express();
 const nunjucks = require('nunjucks');
 const { urlencoded } = require('express');
 
+const db = require('./database/db');
+
 // Configuração da pasta public
 server.use(express.static('public'));
 
@@ -20,7 +22,17 @@ server.get('/create-point', (req, res) => {
 });
 
 server.get('/search-results', (req, res) => {
-    return res.render('search-results.html');
+    db.all(`SELECT * FROM places`, function(err, rows) {
+        if (err) {
+            return console.log(err);
+        }
+
+        const total = rows.length;
+
+        return res.render('search-results.html', { places: rows, total: total });
+    });
+
+    
 });
 
 server.listen(3000, () => {

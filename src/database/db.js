@@ -3,54 +3,77 @@ const sqlite3 = require('sqlite3').verbose();
 // Criação do objeto que faz as operações SQL
 const db = new sqlite3.Database('./src/database/database.db');
 
+module.exports = db;
+
 // Utilização do objeto de Banco de Dados
-db.serialize(() => {
-    // Criação das tabelas
-    db.run(`
-        CREATE TABLE IF NOT EXISTS places (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            image TEXT,
-            name TEXT,
-            address TEXT,
-            address2 TEXT,
-            state TEXT,
-            city TEXT,
-            items TEXT
-        );
-    `);
 
-    const query = `
-        INSERT INTO places (
-            image,
-            name,
-            address,
-            address2,
-            state,
-            city,
-            items
-        ) VALUES (
-            ?, ?, ?, ?, ?, ?, ?
-        );
-    `
+// db.serialize(() => {
+//     // Criação das tabelas
+//     // db.run(`
+//     //     CREATE TABLE IF NOT EXISTS places (
+//     //         id INTEGER PRIMARY KEY AUTOINCREMENT,
+//     //         image TEXT,
+//     //         name TEXT,
+//     //         address TEXT,
+//     //         address2 TEXT,
+//     //         state TEXT,
+//     //         city TEXT,
+//     //         items TEXT
+//     //     );
+//     // `);
 
-    const values = [
-        'https://images.unsplash.com/photo-1474631245212-32dc3c8310c6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=60',
-        'Colectoria',
-        'Guilherme Gemballa, jardim América',
-        'Nº 260',
-        'Santa Catarina',
-        'Rio do Sul',
-        'Resíduos Eletrônicos, Lâmpadas'
-    ]
+//     // // INCLUSÃO DE DADOS
+//     // const query = `
+//     //     INSERT INTO places (
+//     //         image,
+//     //         name,
+//     //         address,
+//     //         address2,
+//     //         state,
+//     //         city,
+//     //         items
+//     //     ) VALUES (
+//     //         ?, ?, ?, ?, ?, ?, ?
+//     //     );
+//     // `
 
-    function afterInsertData(err) {
-        if (err) {
-            return console.log(err);
-        }
+//     // const values = [
+//     //     'https://images.unsplash.com/photo-1528323273322-d81458248d40?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=801&q=80',
+//     //     'Papersider',
+//     //     'Guilherme Gemballa, jardim América',
+//     //     'Nº 260',
+//     //     'Santa Catarina',
+//     //     'Rio do Sul',
+//     //     'Papéis e Papelão'
+//     // ]
 
-        console.log('Cadastrado com sucesso');
-        console.log(this);
-    }
+//     // function afterInsertData(err) {
+//     //     if (err) {
+//     //         return console.log(err);
+//     //     }
 
-    db.run(query, values, afterInsertData);
-});
+//     //     console.log('Cadastrado com sucesso');
+//     //     console.log(this);
+//     // }
+
+//     // // CONSULTA DOS DADOS
+//     // db.all(`SELECT * FROM places`, function(err, rows) {
+//     //     if (err) {
+//     //         return console.log(err);
+//     //     }
+
+//     //     console.log('Aqui estão seus registros');
+//     //     console.log(rows);
+//     // });
+
+//     // // DELETAR DADOS DA TABELA
+//     // db.run(`DELETE FROM places WHERE id = ?`, [1]), function(err) {
+//     //     if (err) {
+//     //         return console.log(err);
+//     //     }
+
+//     //     console.log('Registro deletado com sucesso.');
+//     // };
+    
+//     // db.run(query, values, afterInsertData);
+// });
